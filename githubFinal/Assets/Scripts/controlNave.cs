@@ -9,6 +9,7 @@ public class controlNave : MonoBehaviour
     Transform transform;
     AudioSource audioSource;
     VidaPlayer playerVida;
+    CombustiblePlayer combustiblePlayer;
     Vector3 initialPosition;
     Quaternion initialRotation;
 
@@ -18,6 +19,7 @@ public class controlNave : MonoBehaviour
         transform = GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
         playerVida = GetComponent<VidaPlayer>();
+        combustiblePlayer = GetComponent<CombustiblePlayer>();
         initialPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z) ;
         initialRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
     }
@@ -36,6 +38,7 @@ public class controlNave : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
+            combustiblePlayer.bajarCombustible();
             rigidbody.freezeRotation = true;
             rigidbody.AddRelativeForce(Vector3.down);
             if (!audioSource.isPlaying)
@@ -49,7 +52,7 @@ public class controlNave : MonoBehaviour
         }
         rigidbody.freezeRotation = false;
     }
-    private void rotacion()
+    private void rotacion() 
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -80,9 +83,12 @@ public class controlNave : MonoBehaviour
                 SceneManager.LoadScene("Nivel2");
                 break;
             default:
-                playerVida.bajarVida();
-                transform.position = initialPosition;
-                transform.rotation = initialRotation;
+                if (playerVida.bajarVida() && combustiblePlayer.getCombustible() != 0)
+                {
+                    transform.position = initialPosition;
+                    transform.rotation = initialRotation;
+                }
+                
                 break;
         }
     }
