@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Colision segura
+  - Gasolina
+  - Aterrizaje
   layers:
   - Default
   - TransparentFX

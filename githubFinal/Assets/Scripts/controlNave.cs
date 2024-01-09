@@ -68,16 +68,16 @@ public class controlNave : MonoBehaviour
             transform.rotation = rotarIzquierda;
         }
     }
-    /*private void OnTriggerEnter(Collider other)
-    {
-        print("Colision detectada " + other.gameObject.tag);
-    }*/
+ 
     private void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
         {
             case "colisionSegura":
                 print("Colision segura");
+                break;
+            case "Gasolina":
+                print("Gasolina");
                 break;
             case "Aterrizaje":
                 SceneManager.LoadScene("Nivel2");

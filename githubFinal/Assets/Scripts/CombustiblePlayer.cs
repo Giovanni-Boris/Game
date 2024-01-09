@@ -30,8 +30,12 @@ public class CombustiblePlayer : MonoBehaviour
             GameOver();
             return false;
         }
-        combustible -= Time.deltaTime;
+        combustible -= Time.deltaTime*3;
         return true;
+    }
+    public void aumentarCombustible()
+    {
+        combustible += 1;
     }
     public void resetGame()
     {

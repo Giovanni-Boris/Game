@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     public TextMeshProUGUI textMeshPro;
+    public GasolinaEnter gasolinaEnter;
     public void Setup(int score)
     {
         gameObject.SetActive(true);
@@ -15,5 +16,6 @@ public class GameOverScreen : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene("Nivel1");
+        gasolinaEnter.activar();
     }
 }
