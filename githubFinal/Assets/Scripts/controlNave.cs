@@ -68,9 +68,11 @@ public class controlNave : MonoBehaviour
             transform.rotation = rotarIzquierda;
         }
     }
- 
+
+    //private static int nivelActual = 1;
     private void OnCollisionEnter(Collision collision)
     {
+        
         switch (collision.gameObject.tag)
         {
             case "colisionSegura":
@@ -80,7 +82,18 @@ public class controlNave : MonoBehaviour
                 print("Gasolina");
                 break;
             case "Aterrizaje":
-                SceneManager.LoadScene("Nivel2");
+                string nombreEscena = SceneManager.GetActiveScene().name;
+                char ultimoCaracter = nombreEscena[nombreEscena.Length - 1];
+                int valorEntero = int.Parse(ultimoCaracter.ToString());
+                valorEntero++;
+                print("Pasando al nivel"+valorEntero);
+                if(valorEntero == 5)
+                {
+                }
+                else
+                {
+                    SceneManager.LoadScene("nivel" + valorEntero);
+                }
                 break;
             default:
                 if (playerVida.bajarVida() && combustiblePlayer.getCombustible() != 0)
